@@ -127,6 +127,27 @@ $(function(){
 	   }
 	}
 	
+	$.ajax({
+		url:"xhr/json.php",
+		type: "get",
+		dataType:"json",
+		success: function (respond){
+			for (var i = 0, j=respond.gifts.length; i<j; i++){
+				var jso = respond.gifts[i];
+				$(''+
+					"<li>name</li>"+
+					"<li>type</li>"+
+					"<li>location</li>"+
+					"<li>discrip</li>"
+			).appendTo("#giftList");
+				
+		};
+			
+		}
+		
+	});
+
+	
 	$("#giftForm").on("submit", store)
 	$("#displyStorage").click(disStorage)
 	$("#clearStorage").click(clearData)
