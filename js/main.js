@@ -53,7 +53,35 @@ $(function(){
 			
 	}
 	
-	function getStorage (){
+	function disStorage(){
+		if(localStorage.length === 0){
+			alert("there is no data");
+		}
+		var makeDiv = $("#giftList").add("div");
+		makeDiv.attr("id", "listItems");
+		var makeList = $("#listItems").add("ul");
+		makeDiv.append(makeList);
+		document.body.append(makeDiv);
+		//$("#listItems").css(display: block);
+		for(var i = 0,j=localStorage.length; i<j; i++){
+			var makeLi = $("#listItems").find("ul").add("li");
+			var linksLi = $("#listItems").find("li").add("li");
+			makeList.append(makeLi);
+			var key = localStorage.key(i);
+			var value = localStorage.getItem(key);
+			var object = JSON.parse(value);
+			var makeSubLi = $("#listItems").find("li").add("ul");
+			makeLi.append(makeSubLi);
+			for( var n in object){
+				var makeSubList = makeSubLi.add("li");
+				var objSubText = object[n][0] +" "+object[n][1];
+				makeSubList.innerHTML = objSubText;
+				makeSubLi.append(linksLi);
+			}
+		}
+	}
+	
+	/*function getStorage (){
 		//toggleControl("on");
 		if(localStorage.length === 0){
 			alert("there is no data so I added some for you");
@@ -87,7 +115,7 @@ $(function(){
 		}
 		
 		
-	}
+	}*/
 	function clearData () {
 	  if(localStorage.length === 0){
 	  alert("no data")
@@ -100,7 +128,7 @@ $(function(){
 	}
 	
 	$("#giftForm").on("submit", store)
-	$("#displyStorage").click(getStorage)
+	$("#displyStorage").click(disStorage)
 	$("#clearStorage").click(clearData)
 	
 	
